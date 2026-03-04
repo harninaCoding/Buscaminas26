@@ -27,6 +27,12 @@ class TableroTest2 {
 		 actual = tablero.cuentaMinas();
 		//comprobacion del caso de prueba
 		assertEquals(expected,actual);
+		expected=6;
+		//ejecucion del caso de prueba
+		tablero = new Tablero(Dificultad.NORMAL, Densidad.FACIL);
+		actual = tablero.cuentaMinas();
+		//comprobacion del caso de prueba
+		assertEquals(expected,actual);
 	}
 
 	

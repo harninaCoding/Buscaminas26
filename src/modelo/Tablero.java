@@ -1,6 +1,5 @@
 package modelo;
 
-import control.Sorteador;
 import utiles.Utiles;
 
 public class Tablero {
@@ -14,9 +13,14 @@ public class Tablero {
 		this.dificultad = dificultad;
 		this.densidad = densidad;
 		crearCasillas();
-		new Sorteador().sortearMinas(this);
+		sortearMinas();
 	}
 
+//////////////////////Establecer minas alrededor
+	private void establecerMinasAlrededor() {
+		
+	}
+	///////////////////////////////////
 ///////////////// Sortear minas
 	// Por que hay algo de logica en la clase de Modelo?. Porque es logica que sirve
 	// para para el dominio.
@@ -43,7 +47,8 @@ public class Tablero {
 	}
 
 	private int getTotalMinas(int cantidadCasillas, Densidad densidad) {
-		return cantidadCasillas / densidad.getPorcentaje();
+//		return cantidadCasillas / densidad.getPorcentaje();
+		return (cantidadCasillas * densidad.getPorcentaje()) / 100;
 	}
 
 	private int getTotalCasillas(Casilla[][] casillas) {
