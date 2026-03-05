@@ -16,10 +16,27 @@ public class Tablero {
 		sortearMinas();
 	}
 
-//////////////////////Establecer minas alrededor
-	private void establecerMinasAlrededor() {
+	public Tablero(Constructor tipo,Coordenada... coordena) {
+		super();
+		this.dificultad = Dificultad.FACIL;
+		crearCasillas();
+		for (Coordenada coordenada : coordena) {
+			setMina(coordenada);
+			establecerMinasAlrededor(coordenada);
+		}
 		
 	}
+
+	////////////////////// Establecer minas alrededor
+	/**
+	 * Establece en las casillas adyacente a coordenada una mina mas
+	 * de las ya existentes en la casilla
+	 * @param coordenada
+	 */
+	private void establecerMinasAlrededor(Coordenada coordenada) {
+
+	}
+
 	///////////////////////////////////
 ///////////////// Sortear minas
 	// Por que hay algo de logica en la clase de Modelo?. Porque es logica que sirve
@@ -37,6 +54,7 @@ public class Tablero {
 				mina = isMina(coordenada);
 				if (!mina) {
 					setMina(coordenada);
+					establecerMinasAlrededor(coordenada);
 				}
 			} while (mina);
 		}
@@ -97,6 +115,15 @@ public class Tablero {
 			}
 		}
 		return contador;
+	}
+
+	public int getMinasAlrededorCasilla(Coordenada coordenada) {
+		return casillas[coordenada.getX()][coordenada.getY()].getMinasAlrededor();
+	}
+
+	public int cuentaMinasAlrededor(Coordenada coordenada) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

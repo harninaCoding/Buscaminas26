@@ -24,11 +24,11 @@ class TableroTest3 {
 
 	@ParameterizedTest
 	@MethodSource("proveerConfiguracionesTablero")
-	void test(Dificultad dificultad, Densidad densidad, int expected) {
+	void test(Dificultad dificultad, Densidad densidad, int esperado) {
 		Tablero tablero = new Tablero(dificultad, densidad);
 		int actual = tablero.cuentaMinas();
 		// comprobacion del caso de prueba
-		assertEquals(expected, actual);
+		assertEquals(esperado, actual);
 	}
 
 }
