@@ -27,6 +27,7 @@ public class Tablero {
 		
 	}
 
+	
 	////////////////////// Establecer minas alrededor
 	/**
 	 * Establece en las casillas adyacente a coordenada una mina mas
