@@ -1,4 +1,4 @@
-package test;
+package test.hu1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,8 +10,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 import modelo.Constructor;
 import modelo.Coordenada;
 import modelo.Tablero;
+import test.Visor;
 
-class TableroMinasAlrededor2 {
+class TableroMinasAlrededorTestOLD {
 
 	@ParameterizedTest
 	@MethodSource("dameCasos")
@@ -20,7 +21,7 @@ class TableroMinasAlrededor2 {
 		Coordenada coordenadaDos = new Coordenada(0, 0);
 		Tablero tablero = new Tablero(Constructor.TEST, coordenada, coordenadaDos);
 		new Visor().visorMinasalrededor(tablero);
-		int actual = tablero.cuentaMinasAlrededor(data.casillaSinMina);
+		int actual = tablero.getMinasAlrededor(data.casillaSinMina);
 		assertEquals(data.minasAlrededorEsperado, actual);
 	}
 

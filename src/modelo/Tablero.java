@@ -16,7 +16,7 @@ public class Tablero {
 		sortearMinas();
 	}
 
-	public Tablero(Constructor tipo,Coordenada... coordena) {
+	public Tablero(Constructor tipo, Coordenada... coordena) {
 		super();
 		this.dificultad = Dificultad.FACIL;
 		crearCasillas();
@@ -24,18 +24,42 @@ public class Tablero {
 			setMina(coordenada);
 			establecerMinasAlrededor(coordenada);
 		}
-		
+
 	}
 
-	
 	////////////////////// Establecer minas alrededor
 	/**
-	 * Establece en las casillas adyacente a coordenada una mina mas
-	 * de las ya existentes en la casilla
-	 * @param coordenada
+	 * Establece en las casillas adyacente a coordenada una mina mas de las ya
+	 * existentes en la casilla
+	 * 
+	 * @param posicionMina
 	 */
-	private void establecerMinasAlrededor(Coordenada coordenada) {
+	private void establecerMinasAlrededor(Coordenada posicionMina) {
+		// Doble bucle para recorrer las casillas adyacentes a coordenada
+		for (int dx = -1; dx <= 1; dx++) {
+			for (int dy = -1; dy <= 1; dy++) {
+				// excluir la propia casilla
+				if (!(dx == 0 && dy == 0)) {
+					//Obtengo la coordenada adyacente sobre la que voy a trabajar
+					Coordenada adyacenteALaMina = new Coordenada(posicionMina.getX() + dx, posicionMina.getY() + dy);
+					//1.- La casilla adyacente se sale del tablero
+					if(validaCoordenada(adyacenteALaMina)&&!isMina(adyacenteALaMina)) {
+						//tengo que incrementar en 1 el valor de minasAlrededor de la casilla adyacente
+						incrementarMinasAlrededor(adyacenteALaMina);
+					}
+				}
+			}
+		}
+	}
 
+	private void incrementarMinasAlrededor(Coordenada adyacente) {
+		casillas[adyacente.getX()][adyacente.getY()].setMinasAlrededor(
+				casillas[adyacente.getX()][adyacente.getY()].getMinasAlrededor() + 1);
+	}
+
+	private boolean validaCoordenada(Coordenada posicion) {
+		return posicion.getX() >= 0 && posicion.getY() >= 0 && posicion.getX() < dificultad.size
+				&& posicion.getY() < dificultad.size;
 	}
 
 	///////////////////////////////////
@@ -118,13 +142,7 @@ public class Tablero {
 		return contador;
 	}
 
-	public int getMinasAlrededorCasilla(Coordenada coordenada) {
+	public int getMinasAlrededor(Coordenada coordenada) {
 		return casillas[coordenada.getX()][coordenada.getY()].getMinasAlrededor();
 	}
-
-	public int cuentaMinasAlrededor(Coordenada coordenada) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

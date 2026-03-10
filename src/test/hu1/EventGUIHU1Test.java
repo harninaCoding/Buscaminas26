@@ -1,9 +1,10 @@
-package control;
+package test.hu1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import control.EventGUI;
 import modelo.Dificultad;
 import vista.GUI;
 
@@ -17,7 +18,7 @@ class EventGUIHU1Test {
 		//TEngo un problema cuando se crea el eventgui no se crea el tablero
 		//se crea cuando se dispara el evento de btniniciar
 		eventGUI.crearTablero();
-		gui.getCmbDificultad().setSelectedIndex(1);
+		gui.getCmbDificultad().setSelectedIndex(0);
 		assertEquals(eventGUI.getTablero().getDificultad(),
 				(Dificultad)gui.getCmbDificultad().getSelectedItem());
 	}

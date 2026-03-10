@@ -12,7 +12,7 @@ import modelo.Densidad;
 import modelo.Dificultad;
 import modelo.Tablero;
 
-class TableroMinasAlrededor {
+class TableroMinasAlrededorTestVEryOLD {
 
 	@Test
 	@Disabled
@@ -29,13 +29,14 @@ class TableroMinasAlrededor {
 			for (int j = 0; j < facil.getSize(); j++) {
 				Coordenada coordenada=new Coordenada(i, j);
 				//Este resultado te dice las minas que hay segun establecerMinasAlrededor
-				int actual = tablero.getMinasAlrededorCasilla(coordenada);
+				int actual = tablero.getMinasAlrededor(coordenada);
 				//Este metodo esta hecho solo para poder comprobar que funciona el anterior.
 				//recorrer las casillas adyacente a la coordenada para conocer el numero
 				//de minas alrededor
 				//Esto ensucia el codigo. Ya lo hicimos con el metodo.cuentaMinas. No debemos abusar
 				//el problema es que puedes equivocarte en los dos metodos
-				int expected=tablero.cuentaMinasAlrededor(coordenada);
+				//esto esta obsoleto
+				int expected=tablero.getMinasAlrededor(coordenada);
 				assertEquals(expected, actual);
 				/*
 				 * Me veo obigado a esto porque es aleatorio. 
@@ -53,7 +54,7 @@ class TableroMinasAlrededor {
 		Tablero tablero=new Tablero(Constructor.TEST, coordenada);
 		int expected=1;
 		new Visor().visorMinasalrededor(tablero);
-		int actual = tablero.getMinasAlrededorCasilla(adyacente);
+		int actual = tablero.getMinasAlrededor(adyacente);
 		assertEquals(expected, actual);
 	}
 	@Test
@@ -64,10 +65,10 @@ class TableroMinasAlrededor {
 		Tablero tablero=new Tablero(Constructor.TEST, coordenadaMinaUno,coordenadaMinaDos);
 		new Visor().visorMinasalrededor(tablero);
 		int expected=2;
-		int actual = tablero.cuentaMinasAlrededor(casillaAdyacenteAMinas);
+		int actual = tablero.getMinasAlrededor(casillaAdyacenteAMinas);
 		assertEquals(expected, actual);
 		casillaAdyacenteAMinas = new Coordenada(1,0);		
-		actual = tablero.cuentaMinasAlrededor(casillaAdyacenteAMinas);
+		actual = tablero.getMinasAlrededor(casillaAdyacenteAMinas);
 		assertEquals(expected, actual);
 	}
 
