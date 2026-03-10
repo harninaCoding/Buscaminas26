@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import control.EventGUI;
 import modelo.Dificultad;
+import presentador.EventGUI;
 import vista.GUI;
 
 class EventGUIHU1Test {

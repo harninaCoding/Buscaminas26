@@ -1,4 +1,4 @@
-package control;
+package presentador;
 
 public class Logica {
 
