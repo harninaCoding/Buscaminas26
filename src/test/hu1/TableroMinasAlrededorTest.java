@@ -18,7 +18,7 @@ class TableroMinasAlrededorTest {
 
 	@ParameterizedTest
 	@MethodSource("dameCasos")
-	@DisplayName("Test de adyacencia bÃ¡sica con 2 bombas (0,0 y 1,1)")
+	@DisplayName("Test de adyacencia basica con 2 bombas (0,0 y 1,1)")
 	void testCuentaMinasParam(TestData data) {
 		Coordenada coordenada = new Coordenada(1, 1);
 		Coordenada coordenadaDos = new Coordenada(0, 0);

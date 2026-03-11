@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.function.BooleanSupplier;
+
 import utiles.Utiles;
 
 public class Tablero {
@@ -40,11 +42,11 @@ public class Tablero {
 			for (int dy = -1; dy <= 1; dy++) {
 				// excluir la propia casilla
 				if (!(dx == 0 && dy == 0)) {
-					//Obtengo la coordenada adyacente sobre la que voy a trabajar
+					// Obtengo la coordenada adyacente sobre la que voy a trabajar
 					Coordenada adyacenteALaMina = new Coordenada(posicionMina.getX() + dx, posicionMina.getY() + dy);
-					//1.- La casilla adyacente se sale del tablero
-					if(validaCoordenada(adyacenteALaMina)&&!isMina(adyacenteALaMina)) {
-						//tengo que incrementar en 1 el valor de minasAlrededor de la casilla adyacente
+					// 1.- La casilla adyacente se sale del tablero
+					if (validaCoordenada(adyacenteALaMina) && !isMina(adyacenteALaMina)) {
+						// tengo que incrementar en 1 el valor de minasAlrededor de la casilla adyacente
 						incrementarMinasAlrededor(adyacenteALaMina);
 					}
 				}
@@ -53,8 +55,7 @@ public class Tablero {
 	}
 
 	private void incrementarMinasAlrededor(Coordenada adyacente) {
-		casillas[adyacente.getX()][adyacente.getY()].setMinasAlrededor(
-				casillas[adyacente.getX()][adyacente.getY()].getMinasAlrededor() + 1);
+		getCasilla(adyacente).setMinasAlrededor(getCasilla(adyacente).getMinasAlrededor() + 1);
 	}
 
 	private boolean validaCoordenada(Coordenada posicion) {
@@ -124,11 +125,11 @@ public class Tablero {
 	}
 
 	public boolean isMina(Coordenada coordenada) {
-		return casillas[coordenada.getX()][coordenada.getY()].isMina();
+		return getCasilla(coordenada).isMina();
 	}
 
 	public void setMina(Coordenada coordenada) {
-		casillas[coordenada.getX()][coordenada.getY()].setMina(true);
+		getCasilla(coordenada).setMina(true);
 	}
 
 	public int cuentaMinas() {
@@ -143,6 +144,53 @@ public class Tablero {
 	}
 
 	public int getMinasAlrededor(Coordenada coordenada) {
-		return casillas[coordenada.getX()][coordenada.getY()].getMinasAlrededor();
+		return getCasilla(coordenada).getMinasAlrededor();
+	}
+
+	private Casilla getCasilla(Coordenada coordenada) {
+		return casillas[coordenada.getX()][coordenada.getY()];
+	}
+
+	public boolean isVelada(Coordenada seleccion) {
+		return getCasilla(seleccion).isVelada();
+	}
+
+	/**
+	 * desvela la casilla indicada si esta velada y no marcada. si se encuentra con
+	 * una casilla que tiene 0 minas alrededor debe hacer una llamada recursiva
+	 * sobre las casillas adyeacentes a esta
+	 * 
+	 * @param coordenada la casilla que queremos desvelar
+	 * @return true si ha desvelado, al menos, una casilla y false en caso contrario
+	 */
+	public boolean desvelarCasilla(Coordenada coordenada) {
+		// la condicion para desvelar
+		if (validaCoordenada(coordenada) && isVelada(coordenada) && !isMarcada(coordenada)) {
+			// aqui hago algo
+			getCasilla(coordenada).setVelada(false);
+			// esto dispara la llamada recursiva
+			if (getCasilla(coordenada).getMinasAlrededor() == 0) {
+				// Doble bucle para recorrer las casillas adyacentes a coordenada
+				for (int dx = -1; dx <= 1; dx++) {
+					for (int dy = -1; dy <= 1; dy++) {
+						// excluir la propia casilla
+						if (!(dx == 0 && dy == 0)) {
+							int x = coordenada.getX() + dx;
+							int y = coordenada.getY() + dy;
+							Coordenada adyacente = new Coordenada(x, y);
+							desvelarCasilla(adyacente);
+						}
+					}
+				}
+			}
+			// hay mas de 0 minas alrededor (caso salida)
+			return true;
+		}
+		// en caso contrario
+		return false;
+	}
+
+	private boolean isMarcada(Coordenada coordenada) {
+		return getCasilla(coordenada).isMarcada();
 	}
 }

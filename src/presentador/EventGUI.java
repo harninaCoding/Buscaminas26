@@ -12,10 +12,7 @@ import vista.AccesoGUI;
 public class EventGUI {
 	private AccesoGUI gui;
 	private Tablero tablero;
-	//Cosntructor para pruebas
-	public EventGUI(Constructor tipo,AccesoGUI gui) {
-		//En este caso no es buena practica, no hay que inventar ningun metodo
-	}
+
 	public EventGUI(AccesoGUI gui) {
 		super();
 		this.gui = gui;

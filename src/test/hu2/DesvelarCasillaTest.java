@@ -15,11 +15,11 @@ class DesvelarCasillaTest {
     @Test
     @DisplayName("Test desvelar casilla con minas alrededor (no recursivo)")
     void testDesvelarCasillaConMinasAlrededor() {
-        // Mine at (0,1)
+        // Mina en (0,1)
         Coordenada mina = new Coordenada(0, 1);
         Tablero tablero = new Tablero(Constructor.TEST, mina);
 
-        // (0,0) has 1 mine around
+        // (0,0) tiene una mina alrededor
         Coordenada seleccion = new Coordenada(0, 0);
         assertTrue(tablero.desvelarCasilla(seleccion));
 

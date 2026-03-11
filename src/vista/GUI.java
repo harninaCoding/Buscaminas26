@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 
 import javax.swing.DefaultComboBoxModel;
@@ -86,8 +87,9 @@ public class GUI extends JFrame implements AccesoGUI{
 		gbc_btnIniciar.gridy = 0;
 		pnlSur.add(btnIniciar, gbc_btnIniciar);
 		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.CENTER);
+		Botonera pnlBotonera = new Botonera(5);
+		
+		contentPane.add(pnlBotonera, BorderLayout.CENTER);
 		
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.NORTH);
