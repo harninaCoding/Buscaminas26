@@ -1,11 +1,14 @@
 package vista;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -18,13 +21,14 @@ import javax.swing.border.EmptyBorder;
 import modelo.Densidad;
 import modelo.Dificultad;
 
-public class GUI extends JFrame implements AccesoGUI{
+public class GUI extends JFrame implements AccesoGUI {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JComboBox cmbDificultad;
 	private JComboBox cmbDensidad;
 	private JButton btnIniciar;
+	private Botonera pnlBotonera;
 
 	/**
 	 * Create the frame.
@@ -37,16 +41,16 @@ public class GUI extends JFrame implements AccesoGUI{
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel pnlSur = new JPanel();
 		contentPane.add(pnlSur, BorderLayout.SOUTH);
 		GridBagLayout gbl_pnlSur = new GridBagLayout();
-		gbl_pnlSur.columnWidths = new int[] {101, 201, 101, 201, 201, 30, 30, 30, 0};
-		gbl_pnlSur.rowHeights = new int[]{21, 0};
-		gbl_pnlSur.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_pnlSur.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_pnlSur.columnWidths = new int[] { 101, 201, 101, 201, 201, 30, 30, 30, 0 };
+		gbl_pnlSur.rowHeights = new int[] { 21, 0 };
+		gbl_pnlSur.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pnlSur.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		pnlSur.setLayout(gbl_pnlSur);
-		
+
 		JLabel lblNewLabel = new JLabel("Dificultad");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.fill = GridBagConstraints.BOTH;
@@ -54,7 +58,7 @@ public class GUI extends JFrame implements AccesoGUI{
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 0;
 		pnlSur.add(lblNewLabel, gbc_lblNewLabel);
-		
+
 		cmbDificultad = new JComboBox();
 		GridBagConstraints gbc_cmbDificultad = new GridBagConstraints();
 		gbc_cmbDificultad.fill = GridBagConstraints.BOTH;
@@ -62,7 +66,7 @@ public class GUI extends JFrame implements AccesoGUI{
 		gbc_cmbDificultad.gridx = 1;
 		gbc_cmbDificultad.gridy = 0;
 		pnlSur.add(cmbDificultad, gbc_cmbDificultad);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Densidad");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.fill = GridBagConstraints.BOTH;
@@ -70,7 +74,7 @@ public class GUI extends JFrame implements AccesoGUI{
 		gbc_lblNewLabel_1.gridx = 2;
 		gbc_lblNewLabel_1.gridy = 0;
 		pnlSur.add(lblNewLabel_1, gbc_lblNewLabel_1);
-		
+
 		cmbDensidad = new JComboBox();
 		GridBagConstraints gbc_cmbDensidad = new GridBagConstraints();
 		gbc_cmbDensidad.fill = GridBagConstraints.BOTH;
@@ -78,7 +82,7 @@ public class GUI extends JFrame implements AccesoGUI{
 		gbc_cmbDensidad.gridx = 3;
 		gbc_cmbDensidad.gridy = 0;
 		pnlSur.add(cmbDensidad, gbc_cmbDensidad);
-		
+
 		btnIniciar = new JButton("Inciar");
 		GridBagConstraints gbc_btnIniciar = new GridBagConstraints();
 		gbc_btnIniciar.gridwidth = 3;
@@ -86,20 +90,24 @@ public class GUI extends JFrame implements AccesoGUI{
 		gbc_btnIniciar.gridx = 5;
 		gbc_btnIniciar.gridy = 0;
 		pnlSur.add(btnIniciar, gbc_btnIniciar);
-		
-		Botonera pnlBotonera = new Botonera(5);
-		
-		contentPane.add(pnlBotonera, BorderLayout.CENTER);
-		
+
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.NORTH);
-		//configurando el cmb de Dificultad 
+		// configurando el cmb de Dificultad
 		getCmbDificultad().setModel(new DefaultComboBoxModel(Dificultad.values()));
 		getCmbDificultad().setSelectedIndex(0);
-		//configurando el cmb de Densidad 
+		// configurando el cmb de Densidad
 		getCmbDensidad().setModel(new DefaultComboBoxModel(Densidad.values()));
 		getCmbDensidad().setSelectedIndex(0);
 	}
+
+	public void crearBotonera(int dimension) {
+		pnlBotonera = new Botonera(dimension);
+		contentPane.add(pnlBotonera, BorderLayout.CENTER);
+		revalidate();
+		repaint();
+	}
+
 	public JComboBox getCmbDificultad() {
 		return cmbDificultad;
 	}
@@ -110,5 +118,10 @@ public class GUI extends JFrame implements AccesoGUI{
 
 	public JButton getBtnIniciar() {
 		return btnIniciar;
+	}
+
+	@Override
+	public List<Component> getBotones() {
+		return Arrays.asList(pnlBotonera.getComponents());
 	}
 }
